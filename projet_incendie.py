@@ -41,11 +41,24 @@ def can2 (l) :
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
 
     return l
+def can3 (l) :
+    global color
+    for loop in range(1) :
+        i = randint(1, 18)
+        j = randint(1, 18)
+        liste[i][j] = 3
+        if liste[i][j] == 3 :
+            color = "orange"
+        c.create_rectangle((i * largeur_case, j * hauteur_case),
+                                ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
 
+
+    return l
 liste = [20*[0] for i in range(20)]
 
 can(liste)
 can2(liste)
+can3(liste)
 print(liste)
 
 c.grid()
