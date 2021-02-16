@@ -13,12 +13,13 @@ hauteur_case = HEIGHT // 20
 c = Canvas(window, width=WIDTH, height=HEIGHT, bg= "blue")
 
 def can (l) :
-    for loop in range(100) :
+    global color
+    for loop in range(200) :
         i = randint(1,18)
         j = randint(1, 18)
         liste[i][j] = 1
         if liste[i][j] == 1 :
-            color = "gray80"
+            color = "#07680A"
         c.create_rectangle((i * largeur_case, j * hauteur_case),
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
 
@@ -26,15 +27,15 @@ def can (l) :
 
 
 
-
-
 def can2 (l) :
-    for loop in range(100) :
+    global color
+    for loop in range(200) :
         i = randint(1,18)
         j = randint(1, 18)
-        liste[i][j] = 1
-        if liste[i][j] == 1 :
-            color = "orange"
+        if liste [i][j] == 0 :
+            liste[i][j] = 2
+        if liste[i][j] == 2 :
+            color = "#E0EC02"
 
         c.create_rectangle((i * largeur_case, j * hauteur_case),
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
