@@ -1,1 +1,1 @@
-import from Tkinter*
+from Tkinter import*
