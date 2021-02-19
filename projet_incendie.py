@@ -13,14 +13,24 @@ cpt = 0
 
 c = Canvas(window, width=WIDTH, height=HEIGHT, bg= "blue")
 
+
 def prop ():
     global p, hor , ver
-    while hor < 16 :
+    hor += 1
+    if hor < 19 :
+
         liste [hor][ver] = 3
-        hor += 1
+
+
+        p = c.create_rectangle((hor * largeur_case, ver * hauteur_case),
+                                   ((hor + 1) * largeur_case, (ver + 1) * hauteur_case), fill="red")
+
         print(liste)
 
-        c.after(20, prop)
+
+
+
+        c.after(100, prop)
 
 
 def can (l) :
