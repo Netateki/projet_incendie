@@ -13,6 +13,16 @@ cpt = 0
 
 c = Canvas(window, width=WIDTH, height=HEIGHT, bg= "blue")
 
+def prop ():
+    global p, hor , ver
+    while hor < 16 :
+        liste [hor][ver] = 3
+        hor += 1
+        print(liste)
+
+        c.after(20, prop)
+
+
 def can (l) :
     global color, p
     for loop in range(200) :
@@ -55,7 +65,7 @@ def can3 (l) :
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
         hor = i
         ver = j
-        print (ver)
+
 
 
     return l
@@ -79,9 +89,8 @@ def ss () :
 
 
 
-
 ss()
-
+prop()
 c.grid()
 
 window.mainloop()
