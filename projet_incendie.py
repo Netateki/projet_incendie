@@ -5,36 +5,28 @@ window = Tk()
 window.title(" PI")
 window.geometry("600x600")
 
-WIDTH = 500
-HEIGHT = 500
+WIDTH = 600
+HEIGHT = 600
 largeur_case = WIDTH // 20
 hauteur_case = HEIGHT // 20
-cpt = 1
-speed = 500
+cpt = 0
 
 c = Canvas(window, width=WIDTH, height=HEIGHT, bg= "blue")
-
-def genere_terrain() :
-    c.delete("all")
-    can()
-    can2()
-    print(liste , "cc")
-
 def ev (event):
     print("CLIQUE")
 
-    n = event.x  // 25
-    u = event.y // 25
+    n = event.x  // 30
+    u = event.y // 30
     if liste[n][u] == 3 or liste[n][u] == 0:
         return
     draw_rect(n, u)
-    if cpt == 1 :
-        change(n, u)
+    change(n, u)
 
 def prop ():
     global p, hor, ver, n, u
     c.bind("<Button-1>", ev)
 
+    #print(liste)
     c.after(300, prop)
 
 def nombre_voisin(i, j) :
@@ -49,6 +41,7 @@ def nombre_voisin(i, j) :
         nf += 1
     return nf
 
+
 def is_burn(nf) :
     possibilite = [i for i in range(10)]
     mutable = [i for i in range(10)]
@@ -58,10 +51,9 @@ def is_burn(nf) :
         possibilite[i]= mutable.pop(x)
     return cle in possibilite
 
-
-def can () :
+def can (l) :
     global color, p
-    for loop in range(200) :
+    for loop in range(80) :
         i = randint(1,18)
         j = randint(1, 18)
         liste[i][j] = 1
@@ -70,26 +62,25 @@ def can () :
         p = c.create_rectangle((i * largeur_case, j * hauteur_case),
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
 
-    return liste
+    return l
 
-def can2 () :
+def can2 (l) :
     global color, p
-    for loop in range(250) :
+    for loop in range(450) :
         i = randint(1,18)
         j = randint(1, 18)
-
-        liste[i][j] = 2
+        if liste[i][j] == 0 :
+            liste[i][j] = 2
         if liste[i][j] == 2 :
             color = "#E0EC02"
 
             p = c.create_rectangle((i * largeur_case, j * hauteur_case),
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
 
-    return liste
-
+    return l
 
 def can3 (l) :
-    global color, p, hor, ver
+    global color, p, hor, ver, hor1, ver1
     for loop in range(1) :
         i = randint(1, 18)
         j = randint(1, 18)
@@ -101,6 +92,8 @@ def can3 (l) :
                                 ((i + 1) * largeur_case, (j + 1) * hauteur_case), fill=color)
         hor = i
         ver = j
+        hor1 = i
+        ver1 = j
 
     return l
 
@@ -122,6 +115,7 @@ def change(i, j):
         if not is_burn(nf):
             return
 
+
     liste[i][j] = 3
 
     #initialisation
@@ -134,24 +128,18 @@ def change(i, j):
 
     else:
         #récurrence
-        c.after(speed, change, i - 1, j)
-        c.after(speed, change, i + 1, j)
-        c.after(speed, change, i, j - 1)
-        c.after(speed, change, i, j + 1)
-
+        c.after(500, change, i - 1, j)
+        c.after(500, change, i + 1, j)
+        c.after(500, change, i, j - 1)
+        c.after(500, change, i, j + 1)
 
 liste = [20*[0] for i in range(20)]
 
+can(liste)
+can2(liste)
 
-button_genere_terrain = Button(window, text="génèrer un terrain" , font=("Courrier", 16), bg='white', fg='BLUE', command = genere_terrain)
-
-button_change_etape = Button(window, text="next" , font=("Courrier", 16), bg='white', fg='BLUE')
 print(liste)
 prop()
-c.grid(row = 1, column = 1)
-button_genere_terrain.grid(row = 0, column = 1)
-button_change_etape.grid(row = 2, column = 1)
-
+c.grid()
 
 window.mainloop()
-print(speed)
